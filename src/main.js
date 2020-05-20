@@ -2,11 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
-var firebase = require("firebase/app");
-
-//require("firebase/auth");
-require("firebase/firestore");
 
 var firebaseConfig = {
   apiKey: "AIzaSyCS3ET5boFO9KQYfzXVM3wetboBTwoIPpY",
@@ -19,6 +17,12 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+
+const db = firebase.firestore();
+
+export {db} 
+
 
 Vue.config.productionTip = false
 
