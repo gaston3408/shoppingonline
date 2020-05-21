@@ -10,21 +10,26 @@ export default new Vuex.Store({
     products:[]
   },
   mutations: {
+    setProducts(state, payload){
+      state.products = payload
+    }
   },
   actions: {
     getProducts({commit}){
-      try{
+      let products = []
+
         db.collection('products').get()
         .then(res => {
           res.forEach(item =>{
-            console.log(item.data())
+            let product= item.data()
+            product.id = item.id
+            products.push( product )
+            commit('setProducts',products)
           })
           
         })
-
-      }catch(error){
-        console.log(error)
-      }
+        .catch = error => console.log(error)
+      
         
       }
     },
