@@ -17,7 +17,7 @@ export default new Vuex.Store({
   actions: {
     getProducts({commit}){
       let products = []
-
+      try{
         db.collection('products').get()
         .then(res => {
           res.forEach(item =>{
@@ -28,7 +28,7 @@ export default new Vuex.Store({
           })
           
         })
-        .catch = error => console.log(error)
+      } catch ( error ) { console.log(error) }
       
         
       }
