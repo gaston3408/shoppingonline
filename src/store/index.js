@@ -9,16 +9,25 @@ export default new Vuex.Store({
   state: {
     products:[],
     filter:'',
+    product:{},
   },
   mutations: {
+
     setProducts(state, payload){
       state.products = payload
     },
+
     setFilter(state,payload){
       state.filter = payload.toLowerCase();
+    },
+
+    setProduct(state,payload){
+      state.product = payload
     }
+    
   },
   actions: {
+
     getProducts({commit}){
       let products = []
       try{
@@ -34,8 +43,19 @@ export default new Vuex.Store({
         })
       } catch ( error ) { console.log(error) }  
       },
+
       searchingProducts({commit},payload){
         commit('setFilter',payload)
+      },
+
+      getProduct({commit},id){
+        db.collection('products').doc(id).get()
+        .then(res=>{
+          let product = res.data()
+          product.id = res.id
+          commit('setProduct',product)
+        }).catch(err=>
+          console.log(err))
       }
     },
     getters:{

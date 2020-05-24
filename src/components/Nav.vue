@@ -1,8 +1,10 @@
 <template>
-  <div id="nav">
+  <div id="navBar">
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light py-4 ">
+        <router-link to="/">
         <i class="fas fa-tshirt fa-3x ml-4 "></i>
+        </router-link>
         <a class="navbar-brand display-1 ml-5" href="#">TUTIENDA.COM</a>
         <button
           class="navbar-toggler"
@@ -37,7 +39,7 @@
 
 <script>
 export default {
-  name: "nav"
+  name: "navBar"
 };
 </script>
 
