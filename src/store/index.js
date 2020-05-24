@@ -7,11 +7,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    products:[]
+    products:[],
+    filter:'',
   },
   mutations: {
     setProducts(state, payload){
       state.products = payload
+    },
+    setFilter(state,payload){
+      state.filter = payload.toLowerCase();
     }
   },
   actions: {
@@ -28,11 +32,16 @@ export default new Vuex.Store({
           })
           
         })
-      } catch ( error ) { console.log(error) }
-      
-        
+      } catch ( error ) { console.log(error) }  
+      },
+      searchingProducts({commit},payload){
+        commit('setFilter',payload)
       }
     },
-  modules: {
-  }
+    getters:{
+      productsFiltered(state){
+        let productsFilter = state.products.filter(item=> item.name.toLowerCase().indexOf(state.filter) >= 0 )
+        return productsFilter
+      }
+    }
 })
