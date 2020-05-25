@@ -6,7 +6,8 @@ import router from './router'
 import store from './store'
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-
+import 'firebase/auth'
+import 'firebase/storage'
 
 var firebaseConfig = {
   apiKey: "AIzaSyCS3ET5boFO9KQYfzXVM3wetboBTwoIPpY",
@@ -22,8 +23,10 @@ firebase.initializeApp(firebaseConfig);
 
 
 const db = firebase.firestore();
+const auth = firebase.auth();
+const storage = firebase.storage();
 
-export {db} 
+export {firebase, db, auth, storage} 
 
 
 Vue.config.productionTip = false

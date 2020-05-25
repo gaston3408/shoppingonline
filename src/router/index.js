@@ -13,6 +13,11 @@ Vue.use(VueRouter)
     path: '/product/:id',
     name:'product',
     component: () => import('../views/Product.vue')
+  },
+  {
+    path: '/entry',
+    name:'entry',
+    component: () => import('../views/Entry.vue')
   }
 ]
 

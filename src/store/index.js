@@ -23,6 +23,7 @@ export default new Vuex.Store({
 
     setProduct(state,payload){
       state.product = payload
+      state.filter= ''
     }
     
   },
