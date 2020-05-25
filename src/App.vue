@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Nav/>
-    <router-view/>
+    <Nav class="shadow-sm fixed-top"/>
+      <router-view class="pt-5"/>
   </div>
 </template>
 

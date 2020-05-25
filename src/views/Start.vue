@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="pt-5 col-12">
         <form @submit.prevent="searchingProducts(filter)" class="d-flex justify-content-end pr-5">
