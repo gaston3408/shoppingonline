@@ -7,7 +7,7 @@
           <span class="h3" v-if="registro">REGISTRO</span>
         </h1>
         <div class="card-body">
-          <button class="btn-danger btn-block py-3 mb-3 rounded">
+          <button class="btn-danger btn-block py-3 mb-3 rounded" @click="google">
             <i class="fab fa-google mr-3"></i>GOOGLE
           </button>
           <button class="btn-info btn-block py-3 rounded">
@@ -26,10 +26,34 @@
 </template>
 
 <script>
+import {firebase, auth, db} from '../main'
 export default {
   data() {
     return {
       registro: false
+    }
+  },
+  methods: {
+    async google(){
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().languageCode = 'es';
+  try{
+    const result = await firebase.auth().signInWithPopup(provider);
+    const user = result.user;
+    //construir usuario 
+    const dataUser = {
+      name: user.displayName,
+      email: user.email,
+      uid: user.uid,
+      picture: user.photoURL
+    }
+    
+    //guardar en firestore
+    await db.collection('users').doc(dataUser.uid).set(dataUser)
+
+  }catch(error){
+    console.log(error)
+  }
     }
   },
 
