@@ -1,14 +1,14 @@
 <template>
-  <div class="container mt-5">
+  <div class="container-fluid  mt-5 ">
     <div class="row justify-content-center">
       <div class="pt-5 col-12">
-        <form @submit.prevent="searchingProducts(filter)" class="d-flex justify-content-end pr-5">
+        <form @submit.prevent="searchingProducts(filter)" class="d-flex justify-content-end container">
           <input
             v-model="filter"
             @keyup="searchingProducts(filter)"
             type="text"
             placeholder="  Buscar..."
-            class="text-center border-secondary rounded-pill"
+            class="text-center  rounded-pill "
           />
           <a class="fas fa-search m-2" />
         </form>
@@ -16,7 +16,7 @@
 
       <div
         id="active"
-        class="mt-4 bg-light col-8 col-sm-5 col-md-3 col-lg-2 mb-4 ml-2 rounded"
+        class="mt-4 bg-light col-8 col-sm-5 col-md-4 col-lg-3 mb-4 ml-2 rounded"
         v-for="item in productsFiltered"
         :key="item.id"
       >
@@ -42,9 +42,14 @@ export default {
   },
   mounted() {
     this.getProducts();
+    this.scroll()
   },
   methods: {
-    ...mapActions(["getProducts", "searchingProducts"])
+    ...mapActions(["getProducts", "searchingProducts"]),
+
+    scroll(){
+      window.scrollTo(10000,0)
+    }
   },
   computed: {
     ...mapState(["products"]),
@@ -55,6 +60,6 @@ export default {
 
 <style>
 #active:hover {
-  box-shadow: 2px 2px 2px 2px #999;
+  box-shadow: 2px 2px 2px 2px rgb(127, 182, 135);
 }
 </style>

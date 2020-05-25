@@ -1,11 +1,14 @@
 <template>
   <div id="navBar ">
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light py-4 ">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light py-2 shadow-lg ">
         <router-link to="/">
-        <i class="fas fa-tshirt fa-3x ml-4 "></i>
-        <a class="navbar-brand display-1 ml-5" href="#">TUTIENDA.COM</a>
+          <i class="far fa-gem fa-4x ml-4 "></i>
         </router-link>
+        <router-link to="/">
+          <a class="navbar-brand display-1 ml-5 " >TUTIENDA.COM</a>
+        </router-link>
+
         <button
           class="navbar-toggler"
           type="button"
