@@ -7,11 +7,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+
+    user:{},
+
     products:[],
     filter:'',
     product:{},
   },
   mutations: {
+
+    setUser(state,payload){
+      state.user = payload
+    },
 
     setProducts(state, payload){
       state.products = payload
@@ -57,6 +64,17 @@ export default new Vuex.Store({
           commit('setProduct',product)
         }).catch(err=>
           console.log(err))
+      },
+
+      loginUser({commit},user){
+        //el parametro user viene del main
+        const dataUser = {
+          name: user.displayName,
+          email: user.email,
+          uid: user.uid,
+          picture: user.photoURL
+        }
+        commit('setUser',dataUser)
       }
     },
     getters:{

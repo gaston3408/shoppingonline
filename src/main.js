@@ -31,8 +31,21 @@ export {firebase, db, auth, storage}
 
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+
+//destectar si existe un usuario activo
+auth.onAuthStateChanged( function(user) {
+  if (user) {
+    // lo mando al metodo loginUser
+    store.dispatch('loginUser' , user)
+  } 
+
+  //inicializar app despues de que compruebe si hay usuario
+  new Vue({
+    router,
+    store,
+    render: h => h(App)
+  }).$mount('#app')
+  
+
+});
+
