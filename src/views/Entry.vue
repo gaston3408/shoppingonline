@@ -13,6 +13,9 @@
           <button class="btn-info btn-block btn-md py-2 rounded" @click="facebook">
             <i class="fab fa-facebook mr-3"></i>FACEBOOK
           </button>
+          <div class="mt-3" v-if="error">
+            <div class="alert alert-warning" role="alert">{{error}}</div>
+          </div>
         </div>
         <div class="card-footer bg-white mt-3">
           <button class="btn btn-dark btn-sm btn-block" @click="registro = !registro">
@@ -28,18 +31,16 @@
 
 <script>
 import { firebase, auth, db } from "../main";
-import router from '../router';
-import { mapMutations, mapState } from 'vuex';
+import router from "../router";
+import { mapMutations, mapState } from "vuex";
 export default {
   data() {
     return {
-      registro: false,
-      error:''
+      registro: false
     };
   },
   methods: {
-
-    ...mapMutations(['setUser']),
+    ...mapMutations(["setUser", "setError"]),
 
     google() {
       const provider = new firebase.auth.GoogleAuthProvider();
@@ -48,10 +49,10 @@ export default {
 
     facebook() {
       const provider = new firebase.auth.FacebookAuthProvider();
-      this.login(provider)
+      this.login(provider);
     },
 
-//guardar usuarios
+    //guardar usuarios
     async login(provider) {
       firebase.auth().languageCode = "es";
       try {
@@ -65,28 +66,28 @@ export default {
           picture: user.photoURL
         };
 
-        this.setUser(dataUser)
+        this.setUser(dataUser);
 
-        router.push({name:'start'})
+        router.push({ name: "start" });
         //guardar en firestore
         await db
           .collection("users")
           .doc(dataUser.uid)
           .set(dataUser);
-
-
-
       } catch (error) {
-        console.log(error)
+        if (error.code == "auth/account-exists-with-different-credential") {
+          this.setError(
+            "La cuenta ya existe con otra entidad. Por favor seleccione la correcta"
+          );
+        }
       }
-    },
-
+    }
   },
 
-    computed: {
-      ...mapState(['user'])
-    }
-  
-}
+  computed: {
+    ...mapState(["user"]),
+    ...mapState(['error'])
+  }
+};
 </script>
 

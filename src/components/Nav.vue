@@ -33,6 +33,7 @@
             <li class="nav-item" v-if="authUser">
               <a type="button" class="text-danger nav-link" @click="signOut">Cerrar sesion</a>
             </li>
+            <img :src='user.picture' v-if="authUser" class="rounded-circle" width="30" height="30" alt="">
           </ul>
         </div>
       </nav>
@@ -41,7 +42,7 @@
 </template>
 
 <script>
- import {mapActions , mapGetters} from 'vuex'
+ import {mapActions , mapGetters, mapState} from 'vuex'
 
 export default {
   name: "navBar",
@@ -55,7 +56,8 @@ export default {
     ...mapActions(['signOut']),
   },
   computed: {
-    ...mapGetters(['authUser'])
+    ...mapGetters(['authUser']),
+    ...mapState(['user'])
   },
 };
 </script>

@@ -13,14 +13,21 @@ export default new Vuex.Store({
 
     user:{},
 
+    error:null,
+
     products:[],
     filter:'',
     product:{},
   },
   mutations: {
 
+    setError(state,payload){
+      state.error = payload
+    },
+
     setUser(state,payload){
       state.user = payload
+      state.error = null
     },
 
     setProducts(state, payload){
