@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {db} from '../main'
+import {db , firebase} from '../main'
+import router from '../router'
+
+
 
 
 Vue.use(Vuex)
@@ -67,20 +70,37 @@ export default new Vuex.Store({
       },
 
       loginUser({commit},user){
-        //el parametro user viene del main
-        const dataUser = {
-          name: user.displayName,
-          email: user.email,
-          uid: user.uid,
-          picture: user.photoURL
+        if(user){
+          const dataUser = {
+            name: user.displayName,
+            email: user.email,
+            uid: user.uid,
+            picture: user.photoURL
+          }
+          commit('setUser',dataUser)
+          //el parametro user viene del main
+        }else{
+          commit('setUser', null)
         }
-        commit('setUser',dataUser)
-      }
+
+      },
+
+      signOut({commit}){
+        firebase.auth().signOut()
+        commit('setUser', null )
+        router.push({name: 'start'})
+      },
     },
     getters:{
       productsFiltered(state){
         let productsFilter = state.products.filter(item=> item.name.toLowerCase().indexOf(state.filter) >= 0 )
         return productsFilter
+      },
+
+      authUser(state){
+        if(state.user === '' || state.user === null || state.user === 'undefined'){
+          return false
+        }else{ return true}
       }
     }
 })

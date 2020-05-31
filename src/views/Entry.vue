@@ -1,38 +1,40 @@
 <template>
-  <div class="container-fluid mt-5 bg-light py-5">
+  <div class="container-fluid mt-3 bg-light py-5">
     <div class="row justify-content-center mt-5 mb-5 py-5">
-      <div class="card col-md-7 col-lg-5 col-10 py-5 shadow-lg">
+      <div class="card col-md-7 col-lg-5 col-12 py-5 shadow-lg">
         <h1 class="card-title text-center">
           <span class="h3" v-if="!registro">INGRESO</span>
           <span class="h3" v-if="registro">REGISTRO</span>
         </h1>
         <div class="card-body">
-          <button class="btn-danger btn-block py-3 mb-3 rounded" @click="google">
+          <button class="btn-danger btn-block py-2 mb-3 rounded" @click="google">
             <i class="fab fa-google mr-3"></i>GOOGLE
           </button>
-          <button class="btn-info btn-block py-3 rounded" @click="facebook">
+          <button class="btn-info btn-block btn-md py-2 rounded" @click="facebook">
             <i class="fab fa-facebook mr-3"></i>FACEBOOK
           </button>
         </div>
         <div class="card-footer bg-white mt-3">
-          <button class="btn btn-dark btn-block" @click="registro = !registro">
+          <button class="btn btn-dark btn-sm btn-block" @click="registro = !registro">
             <span v-if="!registro">¿No tienes cuenta? Registrate</span>
             <span v-if="registro">¿Ya tienes cuenta? Ingresa</span>
           </button>
         </div>
       </div>
-      {{user}}
     </div>
+    {{user}}
   </div>
 </template>
 
 <script>
 import { firebase, auth, db } from "../main";
+import router from '../router';
 import { mapMutations, mapState } from 'vuex';
 export default {
   data() {
     return {
-      registro: false
+      registro: false,
+      error:''
     };
   },
   methods: {
@@ -65,6 +67,7 @@ export default {
 
         this.setUser(dataUser)
 
+        router.push({name:'start'})
         //guardar en firestore
         await db
           .collection("users")
@@ -74,7 +77,7 @@ export default {
 
 
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     },
 

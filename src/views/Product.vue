@@ -4,7 +4,7 @@
       <div class="col-lg-10 col-sm-10 col-md-10 ">
         <div class="row bg-light">
           <div class="col-lg-7 col-sm-12 col-md-7 p-0">
-            <img :src="product.img" class="d-block img-fluid" :alt="product.name" />
+            <img id="img" :src="product.img" class="d-block img-fluid" :alt="product.name"/>
           </div>
 
           <div class="col-lg-5 col-sm-12 col-md-5 ">
@@ -14,7 +14,7 @@
               </div>
             </div>
             <div class="card-body text-center m-5">
-              <h5 class="card-title font-weight-bold h2">{{product.name.toUpperCase()}}</h5>
+              <h5 class="card-title font-weight-bold text-uppercase h2">{{product.name}}</h5>
               <p class="card-text py-4 h3">{{product.description}}</p>
               <p class="card-text h1">${{product.price}}</p>
             </div>
@@ -82,4 +82,5 @@ export default {
 </script>
 
 <style>
+
 </style>

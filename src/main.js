@@ -37,7 +37,9 @@ auth.onAuthStateChanged( function(user) {
   if (user) {
     // lo mando al metodo loginUser
     store.dispatch('loginUser' , user)
-  } 
+  } else {
+    store.dispatch('loginUser' , null)
+  }
 
   //inicializar app despues de que compruebe si hay usuario
   new Vue({

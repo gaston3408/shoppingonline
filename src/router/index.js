@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import {firebase} from '../main'
 
 Vue.use(VueRouter)
 
@@ -12,7 +13,8 @@ Vue.use(VueRouter)
   {
     path: '/product/:id',
     name:'product',
-    component: () => import('../views/Product.vue')
+    component: () => import('../views/Product.vue'),
+    meta: { requiresAuth: true }
   },
   {
     path: '/entry',
@@ -25,6 +27,18 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const protectedRoute = to.matched.some(record => record.meta.requiresAuth)
+  const user = firebase.auth().currentUser
+
+  if(protectedRoute && user === null ){
+    next({name:'entry'})
+  }else{
+    next()
+  }
+
 })
 
 export default router
