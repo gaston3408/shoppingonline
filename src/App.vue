@@ -7,18 +7,29 @@
 
 <script>
 import Nav from './components/Nav.vue'
-import {mapActions} from 'vuex'
+import {mapActions ,mapState} from 'vuex'
+
 export default {
   name: 'app',
   components:{
     Nav
   },
 mounted(){
-  this.getProducts()
+  this.getProducts();
+  this.getCart();
   },
 methods:{
-  ...mapActions(['getProducts'])
+  ...mapActions(['getProducts','cartProducts']),
+
+  getCart(){
+    if(this.user){
+      this.cartProducts()
+    }
+  }
   
+},
+computed:{
+  ...mapState(['user'])
 }
 
 }

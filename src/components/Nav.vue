@@ -24,16 +24,47 @@
 
         <div class="collapse navbar-collapse justify-content-end col" id="navbarNav">
           <ul class="navbar-nav mr-4">
+            <li>
+              <router-link :to="{name:'cart'}" v-if="authUser">
+                <a class="nav-link text-primary">Carrito</a>
+              </router-link>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle text-primary"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >Catalogo</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Ropa femenina</a>
+                <a class="dropdown-item" href="#">Ropa masculina</a>
+                <a class="dropdown-item" href="#">Ropa deportiva</a>
+              </div>
+            </li>
+
             <li class="nav-item">
-              <a class="nav-link is-active text-primary " href="#">Nosotros</a>
+              <a class="nav-link is-active text-primary" href="#">Nosotros</a>
             </li>
             <li id="route" class="nav-item">
-              <router-link :to="{name:'entry'}" v-if="!authUser" ><a class="nav-link text-primary" >Ingresar</a></router-link>
+              <router-link :to="{name:'entry'}" v-if="!authUser">
+                <a class="nav-link text-primary">Ingresar</a>
+              </router-link>
             </li>
             <li class="nav-item" v-if="authUser">
               <a type="button" class="text-danger nav-link" @click="signOut">Cerrar sesion</a>
             </li>
-            <img :src='user.picture' v-if="authUser" class="rounded-circle" width="30" height="30" alt="">
+            <img
+              :src="user.picture"
+              v-if="authUser"
+              class="rounded-circle ml-3"
+              width="30"
+              height="30"
+              alt
+            />
           </ul>
         </div>
       </nav>
@@ -42,27 +73,26 @@
 </template>
 
 <script>
- import {mapActions , mapGetters, mapState} from 'vuex'
+import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
   name: "navBar",
-  data(){
-    return{
+  data() {
+    return {
       active: false
-    }
+    };
   },
 
-  methods:{
-    ...mapActions(['signOut']),
+  methods: {
+    ...mapActions(["signOut"])
   },
+
   computed: {
-    ...mapGetters(['authUser']),
-    ...mapState(['user'])
-  },
+    ...mapGetters(["authUser"]),
+    ...mapState(["user"])
+  }
 };
 </script>
 
 <style>
-
-
 </style>

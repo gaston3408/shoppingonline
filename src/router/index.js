@@ -19,7 +19,12 @@ Vue.use(VueRouter)
   {
     path: '/entry',
     name:'entry',
-    component: () => import('../views/Entry.vue')
+    component: () => import('../views/Entry.vue'),
+  },
+  {
+    path:'/cart',
+    name:'cart',
+    component: () => import('../views/Cart.vue')
   }
 ]
 

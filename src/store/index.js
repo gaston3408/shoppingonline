@@ -13,6 +13,8 @@ export default new Vuex.Store({
 
     user:{},
 
+    cart:[],
+
     error:null,
 
     products:[],
@@ -20,6 +22,10 @@ export default new Vuex.Store({
     product:{},
   },
   mutations: {
+
+    setCart(state, payload){
+      state.cart = payload
+    },
 
     setError(state,payload){
       state.error = payload
@@ -46,6 +52,8 @@ export default new Vuex.Store({
   },
   actions: {
 
+    //Products...
+
     getProducts({commit}){
       let products = []
       try{
@@ -54,6 +62,7 @@ export default new Vuex.Store({
           res.forEach(item =>{
             let product= item.data()
             product.id = item.id
+            product.added = false
             products.push( product )
             commit('setProducts',products)
           })
@@ -75,6 +84,56 @@ export default new Vuex.Store({
         }).catch(err=>
           console.log(err))
       },
+      //iniciando carrito de compras
+      addCart({commit},productId){
+        if(!this.state.user){
+          router.push({name: 'entry'})
+        }else{
+        db.collection('carts').add({idUser: this.state.user.uid ,idProduct:productId })
+        .then(()=> this.dispatch('cartProducts'))
+        }
+
+      },
+
+      async cartProducts({commit},state){
+        let cart = []
+        
+        const res = await db.collection('carts').where('idUser','==',this.state.user.uid).get()
+        
+        let getCart = res.forEach(item => {
+            let product = item.data()
+            this.state.products.forEach(item2 =>{
+            if (product.idProduct == item2.id){
+              item2.added=true
+              cart.push( item2 )
+            }
+          })
+        })
+        commit('setCart', cart)
+  
+      },
+
+      async deleteProductCart({commit},productId){
+        
+        try{
+          const res = await db.collection('carts').get()
+          let response = res.forEach(item => {
+            let product= item.data()
+            product.id = item.id
+            if(product.idProduct == productId){
+              db.collection('carts').doc(product.id).delete()   
+            }
+          })
+        }catch(error){
+          console.log(error)
+        }
+
+
+        },
+      
+
+      
+      //User...
 
       loginUser({commit},user){
         if(user){
@@ -88,17 +147,22 @@ export default new Vuex.Store({
           //el parametro user viene del main
         }else{
           commit('setUser', null)
-        }
+        } 
 
       },
 
       signOut({commit}){
         firebase.auth().signOut()
         commit('setUser', null )
-        router.push({name: 'start'})
+        commit('setCart', null )
+        router.push("/")
       },
+      
+
     },
     getters:{
+
+    
       productsFiltered(state){
         let productsFilter = state.products.filter(item=> item.name.toLowerCase().indexOf(state.filter) >= 0 )
         return productsFilter

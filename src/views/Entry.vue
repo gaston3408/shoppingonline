@@ -37,8 +37,14 @@ export default {
   data() {
     return {
       registro: false
-    };
+    }
   },
+    mounted(){
+      if(this.user){
+        router.push({name:'start'})
+      }
+    
+    },
   methods: {
     ...mapMutations(["setUser", "setError"]),
 
@@ -68,7 +74,6 @@ export default {
 
         this.setUser(dataUser);
 
-        router.push({ name: "start" });
         //guardar en firestore
         await db
           .collection("users")
