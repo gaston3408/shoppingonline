@@ -4,15 +4,15 @@
       <div
         v-for="item in cart"
         :key="item.id"
-        class="col-10 col-lg-5 bg-light m-2 rounded row shadow-sm justify-content-between"
+        class="col-10 col-sm-10 col-lg-5 bg-light m-2 rounded row shadow-sm justify-content-between"
       >
-        <div class="col-4 col-md-3 col-lg-4 p-3">
+        <div class="col-12 col-sm-5 col-md-3 col-lg-4 p-3">
           <img :src="item.img" alt="producto" class="img-thumbnail " />
         </div>
-        <div class="col-8 col-md-9 col-lg-8 ">
+        <div class="col-12 col-sm-7 col-md-9 col-lg-8 ">
           <div class="row">
             <h5 class="pt-3 col-10" style="height: 50px">{{item.name}}</h5>
-            <button type="button" class="close col-1" aria-label="Close"  @click="getNewCart(item.id)" >
+            <button type="button" class="close col-1" aria-label="Close"  @click="deleteOfCart(item)" >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -38,14 +38,8 @@ export default {
   },
 
   methods:{
-  ...mapActions(["deleteProductCart","cartProducts"]),
+  ...mapActions(["deleteOfCart","cartProducts"]),
 
-  getNewCart(id){
-    this.deleteProductCart(id)
-    .then(()=>
-    this.cartProducts()
-    )
-  }
   },
   computed: {
     ...mapState(["cart"])

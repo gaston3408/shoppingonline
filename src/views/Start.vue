@@ -20,7 +20,7 @@
         v-for="item in productsFiltered"
         :key="item.id"
       >
-        <router-link :to="{name:'product',params:{id: item.id }}">
+        <router-link :to="{name:'product',params:{id: item.id }}" >
           <div class="card-body container-fluid ">
             <img id="image" :src="item.img" :alt="item.name" class="img-fluid img-card">       
           </div>
@@ -30,10 +30,6 @@
               <h4 class=" col-12 card-title  h6  text-uppercase">{{item.name}}</h4>
               <p class="text-center h4 col-12">${{item.price}}</p>
             </div>
-            
-            <div class="row card-footer justify-content-between">
-              <button  type="button" class=" btn btn-success col-4 rounded  btn-sm" @click="addCart( item.id)"><small>AGREGAR CARRITO</small></button>
-              <button  type="button" class=" btn btn-primary col-4 rounded btn-sm"><small>COMPRAR</small></button>
             </div>
       </div>
     </div>
@@ -50,11 +46,12 @@ export default {
     };
   },
   mounted() {
-    this.getProducts();
+    //this.getProducts();
     this.scroll()
+    
   },
   methods: {
-    ...mapActions(["getProducts", "searchingProducts","addCart"]),
+    ...mapActions(["getProducts", "searchingProducts",'getProduct']),
 
     scroll(){
       window.scrollTo(10000,0)

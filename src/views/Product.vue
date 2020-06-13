@@ -3,11 +3,11 @@
     <div class="mt-5 mb-5 row justify-content-center">
       <div class="col-lg-10 col-sm-10 col-md-10 ">
         <div class="row bg-light">
-          <div class="col-lg-7 col-sm-12 col-md-7 p-0">
+          <div class="col-lg-7 col-sm-12 col-md-12 p-0">
             <img id="img" :src="product.img" class="d-block img-fluid" :alt="product.name"/>
           </div>
 
-          <div class="col-lg-5 col-sm-12 col-md-5 ">
+          <div class="col-lg-5 col-sm-12 col-md-12 ">
             <div class="row">
               <div class="col-lg-5 col-sm-5 m-3">
                 <strong class="h4 ">EN STOCK</strong>
@@ -17,6 +17,12 @@
               <h5 class="card-title font-weight-bold text-uppercase h2">{{product.name}}</h5>
               <p class="card-text py-4 h3">{{product.description}}</p>
               <p class="card-text h1">${{product.price}}</p>
+            </div>
+            <div class=" row justify-content-center">
+              <button class="btn btn-secondary pl-5 pr-5 pt-2 pb-2 col-9 rounded-pill" @click="addCart(product)" v-if="!added">AGREGAR A CARRITO</button>
+              <button class="btn btn-secondary pl-5 pr-5 pt-2 pb-2 col-9 rounded-pill" @click="deleteOfCart(product)" v-if="added" >QUITAR DE CARRITO</button>
+              <button class="btn btn-info pl-5 pr-5 pt-2 pb-2 mt-3 col-9 rounded-pill mb-3">COMPRAR</button>
+          
             </div>
           </div>
           <div class="container-fluid">
@@ -58,7 +64,8 @@ export default {
   name: "product",
   data() {
     return {
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      
     };
   },
   mounted() {
@@ -66,17 +73,18 @@ export default {
     this.scroll()
   },
   methods: {
-    ...mapActions(["getProduct"]),
+    ...mapActions(["getProduct",,"addCart","deleteOfCart"]),
 
     scroll(){
       window.scrollTo(100000,0)
       
-    }
+    },
   },
 
-
   computed: {
-    ...mapState(["product"])
+    ...mapState(["product","cart",'added']),
+
+  
   }
 };
 </script>
