@@ -84,6 +84,7 @@ export default {
           this.setError(
             "La cuenta ya existe con otra entidad. Por favor seleccione la correcta"
           );
+          setTimeout( () =>{ this.setError(null) },3000 )
         }
       }
     }

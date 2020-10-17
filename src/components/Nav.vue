@@ -25,8 +25,8 @@
         <div class="collapse navbar-collapse justify-content-end col" id="navbarNav">
           <ul class="navbar-nav mr-4">
             <li>
-              <router-link :to="{name:'cart'}" v-if="authUser">
-                <a class="nav-link text-primary">Carrito</a>
+              <router-link class="text-decoration-none" :to="{name:'cart'}" v-if="authUser">
+                <a class="nav-link text-primary " >Carrito</a>
               </router-link>
             </li>
             <li class="nav-item dropdown">
@@ -40,9 +40,11 @@
                 aria-expanded="false"
               >Catalogo</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Ropa femenina</a>
-                <a class="dropdown-item" href="#">Ropa masculina</a>
-                <a class="dropdown-item" href="#">Ropa deportiva</a>
+              <router-link class="text-decoration-none" to="/">
+                <a class="dropdown-item"  @click='searchingProducts("mujer")' >Ropa femenina</a>
+                <a class="dropdown-item"  @click='searchingProducts("hombre")'>Ropa masculina</a>
+                <a class="dropdown-item"  @click='searchingProducts("deportiva")'>Ropa deportiva</a>
+              </router-link>
               </div>
             </li>
 
@@ -50,7 +52,7 @@
               <a class="nav-link is-active text-primary" href="#">Nosotros</a>
             </li>
             <li id="route" class="nav-item">
-              <router-link :to="{name:'entry'}" v-if="!authUser">
+              <router-link :to="{name:'login'}" v-if="!authUser">
                 <a class="nav-link text-primary">Ingresar</a>
               </router-link>
             </li>
@@ -84,7 +86,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["signOut"])
+    ...mapActions(["signOut", "searchingProducts"])
   },
 
   computed: {

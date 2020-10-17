@@ -1,5 +1,7 @@
 <template>
-  <div class="container-fluid mt-5  ">
+<div>
+  <Carrousel/>
+  <div class="container-fluid mt-2  ">
     <div class="row  justify-content-center">
       <div class="pt-5 col-12">
         <form @submit.prevent="searchingProducts(filter)" class="d-flex justify-content-end container">
@@ -8,7 +10,7 @@
             @keyup="searchingProducts(filter)"
             type="text"
             placeholder="  Buscar..."
-            class="text-center  rounded-pill "
+            class="text-center  rounded "
           />
           <a class="fas fa-search m-2" />
         </form>
@@ -37,9 +39,13 @@
 </template>
 
 <script>
+import Carrousel from '../components/Carrousel.vue'
 import { mapActions, mapState, mapGetters } from "vuex";
 export default {
   name: "start",
+  components:{
+    Carrousel
+  },
   data() {
     return {
       filter: ""

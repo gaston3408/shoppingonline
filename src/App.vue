@@ -2,6 +2,16 @@
   <div id="app">
     <Nav class="shadow-sm fixed-top"/>
       <router-view class="pt-5"/>
+      <div>
+        <a href="https://api.whatsapp.com/send?phone=542235763408">
+          <img    
+              src=".\images\whatsapp (2).png"
+              class="rounded-circle m-3 fixed-bottom "
+              width="60"
+              height="60"
+            />
+          </a>
+      </div>
   </div>
 </template>
 

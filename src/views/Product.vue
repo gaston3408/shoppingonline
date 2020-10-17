@@ -13,9 +13,9 @@
                 <strong class="h4 ">EN STOCK</strong>
               </div>
             </div>
-            <div class="card-body text-center m-5">
+            <div class="card-body text-center mt-5 mb-5 mr-3 ml-3">
               <h5 class="card-title font-weight-bold text-uppercase h2">{{product.name}}</h5>
-              <p class="card-text py-4 h3">{{product.description}}</p>
+              <p class="card-text py-4 col-12 h3">{{product.description}}</p>
               <p class="card-text h1">${{product.price}}</p>
             </div>
             <div class=" row justify-content-center">

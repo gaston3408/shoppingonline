@@ -14,6 +14,9 @@ export default new Vuex.Store({
     user:{},
 
     cart:[],
+    
+    totalCart: 0,
+
     added: false,
 
     error:null,
@@ -26,6 +29,10 @@ export default new Vuex.Store({
 
     setCart(state, payload){
       state.cart = payload
+    },
+
+    setTotalCart(state , payload){
+      state.totalCart = payload
     },
 
     setAdded(state, payload){
@@ -77,7 +84,7 @@ export default new Vuex.Store({
       },
 
       searchingProducts({commit},payload){
-        commit('setFilter',payload)
+        commit('setFilter', payload)
       },
 
       getProduct({commit},id){
@@ -97,12 +104,13 @@ export default new Vuex.Store({
         let cart = this.state.cart
         console.log(cart)
         if(!this.state.user){
-          router.push({name: 'entry'})
+          router.push({name: 'login'})
         }else{
         db.collection('carts').add({idUser: this.state.user.uid ,idProduct:product.id }),
           cart.push(product)
           commit('setCart',cart)
           this.dispatch('addedOrRemoved',product.id)
+          this.dispatch('getSubtotal')
       }
 
       },
@@ -130,6 +138,16 @@ export default new Vuex.Store({
           })
         })
         commit('setCart', cart)
+        this.dispatch('getSubtotal')
+      },
+
+      //subtotal Cart
+      getSubtotal({commit},state){
+        let subtotal = 0
+        this.state.cart.forEach(element => {
+          subtotal += element.price 
+        })
+        commit('setTotalCart', subtotal)
       },
       
       //eliminar de base de datos
@@ -157,6 +175,7 @@ export default new Vuex.Store({
         })
         commit('setCart',cart)
         this.dispatch('addedOrRemoved', element.id)
+        this.dispatch('getSubtotal')
         
       },
       
@@ -192,7 +211,7 @@ export default new Vuex.Store({
     getters:{
     
       productsFiltered(state){
-        let productsFilter = state.products.filter(item=> item.name.toLowerCase().indexOf(state.filter) >= 0 )
+        let productsFilter = state.products.filter(item=> item.name.toLowerCase().indexOf(state.filter) >= 0 || item.category.toLowerCase().indexOf(state.filter) >= 0 )
         return productsFilter
       },
 

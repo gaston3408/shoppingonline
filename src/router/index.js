@@ -17,9 +17,9 @@ Vue.use(VueRouter)
     meta: { requiresAuth: true }
   },
   {
-    path: '/entry',
-    name:'entry',
-    component: () => import('../views/Entry.vue'),
+    path: '/login',
+    name:'login',
+    component: () => import('../views/Login.vue'),
   },
   {
     path:'/cart',
@@ -39,7 +39,7 @@ router.beforeEach((to, from, next) => {
   const user = firebase.auth().currentUser
 
   if(protectedRoute && user === null ){
-    next({name:'entry'})
+    next({name:'login'})
   }else{
     next()
   }
