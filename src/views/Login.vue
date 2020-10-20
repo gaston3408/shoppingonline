@@ -12,7 +12,7 @@
           </button>
           <button class="btn-info btn-block btn-md py-2 rounded" @click="facebook">
             <i class="fab fa-facebook mr-3"></i>FACEBOOK
-       git    </button>
+          </button>
           <div class="mt-3" v-if="error">
             <div class="alert alert-warning" role="alert">{{error}}</div>
           </div>
@@ -25,7 +25,6 @@
         </div>
       </div>
     </div>
-    {{user}}
   </div>
 </template>
 

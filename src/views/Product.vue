@@ -19,8 +19,12 @@
               <p class="card-text h1">${{product.price}}</p>
             </div>
             <div class=" row justify-content-center">
-              <button class="btn btn-secondary pl-5 pr-5 pt-2 pb-2 col-9 rounded-pill" @click="addCart(product)" v-if="!added">AGREGAR A CARRITO</button>
-              <button class="btn btn-secondary pl-5 pr-5 pt-2 pb-2 col-9 rounded-pill" @click="deleteOfCart(product)" v-if="added" >QUITAR DE CARRITO</button>
+              <button class="btn btn-secondary pl-5 pr-5 pt-2 pb-2 col-9 rounded-pill" 
+                      @click="addCart(product)" v-if="!added"
+                      >AGREGAR A CARRITO</button>
+              <button class="btn btn-secondary pl-5 pr-5 pt-2 pb-2 col-9 rounded-pill" 
+                      @click="deleteOfCart(product)" v-if="added" 
+                      >QUITAR DE CARRITO</button>
               <button class="btn btn-info pl-5 pr-5 pt-2 pb-2 mt-3 col-9 rounded-pill mb-3">COMPRAR</button>
           
             </div>
