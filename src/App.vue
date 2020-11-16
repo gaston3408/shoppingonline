@@ -22,7 +22,7 @@ import {mapActions ,mapState} from 'vuex'
 export default {
   name: 'app',
   components:{
-    Nav
+    Nav,
   },
 mounted(){
   this.getProducts();

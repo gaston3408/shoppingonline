@@ -48,10 +48,10 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-    <div class="row text-center bg-light">
+    <div class="row text-center">
       <div class="col-12 mt-5 mb-5">
-      <span class=" far fa-gem fa-4x"></span>
-      <h1>TUTIENDA.COM</h1>
+      <span class="text-primary far fa-gem fa-4x"></span>
+      <h1 class="text-primary text-h1">TUTIENDA.COM</h1>
       </div>
     </div>
   </div>
@@ -62,3 +62,16 @@ export default {
   name: "carrousel"
 };
 </script>
+
+<style>
+    #carrousel {
+      background-color: rgba(0, 0, 0, 0.795);
+      box-shadow: 0px 1px 17px 27px  rgba(0, 0, 0, 0.795)
+    }
+
+    @media (max-width: 500px){
+      .text-h1 {
+        font-size: 30px;
+      }
+    }
+</style>

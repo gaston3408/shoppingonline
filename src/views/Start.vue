@@ -1,7 +1,7 @@
 <template>
-<div>
+<div class="container-fluid">
   <Carrousel/>
-  <div class="container-fluid mt-2  ">
+  <div class="mt-2  p-0">
     <div class="row  justify-content-center">
       <div class="pt-5 col-12">
         <form @submit.prevent="searchingProducts(filter)" class="d-flex justify-content-end container">
@@ -18,33 +18,36 @@
 
       <div
         id="active"
-        class="mt-4 bg-light col-10 m-3 col-sm-5 col-md-5 col-lg-3 rounded text-center"
+        class="mt-4 p-0 bg-light col-4 m-3 col-sm-5 col-md-5 col-lg-3 rounded text-center"
         v-for="item in productsFiltered"
         :key="item.id"
       >
         <router-link :to="{name:'product',params:{id: item.id }}" >
-          <div class="card-body container-fluid ">
-            <img id="image" :src="item.img" :alt="item.name" class="img-fluid img-card">       
+          <div class=" img-content">
+            <img id="image" :src="item.img" :alt="item.name" class="m-0 img-fluid img-card rounded-top">       
           </div>
         </router-link> 
           
-            <div class="container">
-              <h4 class=" col-12 card-title  h6  text-uppercase">{{item.name}}</h4>
-              <p class="text-center h4 col-12">${{item.price}}</p>
+            <div class="container mb-3 mt-4">
+              <h4 class=" col-12 card-title  h6  text-uppercase text">{{item.name}}</h4>
+              <p class="text-center h4 col-12 text">${{item.price}}</p>
             </div>
             </div>
       </div>
     </div>
+    <Footer class="mt-5"/>
   </div>
 </template>
 
 <script>
 import Carrousel from '../components/Carrousel.vue'
+import Footer from '../components/Footer.vue'
 import { mapActions, mapState, mapGetters } from "vuex";
 export default {
   name: "start",
   components:{
-    Carrousel
+    Carrousel,
+    Footer
   },
   data() {
     return {
@@ -72,6 +75,25 @@ export default {
 
 <style>
 #active:hover {
-  box-shadow: 2px 2px 2px 2px rgb(127, 182, 135);
+  box-shadow: 2px 2px 5px 5px rgb(188, 190, 188);
 }
+
+@media (max-width: 500px) {
+  .text {
+    font-size: 10px;
+  }
+}
+#footer {
+      background-color: rgba(0, 0, 0, 0.795);
+      box-shadow: 0px 1px 17px 27px  rgba(0, 0, 0, 0.795)
+    }
+    .icon:hover {
+        color: white
+    }
+    @media (max-width: 768){
+        .title {
+            margin-left: 0
+        }
+    }
+
 </style>

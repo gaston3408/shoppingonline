@@ -3,10 +3,10 @@
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 shadow-lg row">
         <router-link to="/">
-          <i class="far fa-gem fa-2x col"></i>
+          <i class="far fa-gem fa-2x col" @click='searchingProducts("")'></i>
         </router-link>
         <router-link to="/">
-          <a class="navbar-brand display-1 col text-fluid">TUTIENDA.COM</a>
+          <a class="navbar-brand display-1 col text-fluid" @click='searchingProducts("")'>TUTIENDA.COM</a>
         </router-link>
         <div class="d-flex justify-content-end col">
           <button
@@ -101,7 +101,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["signOut", "searchingProducts"]),
+    ...mapActions(["signOut", "searchingProducts", "getProducts"]),
   },
 
   computed: {
