@@ -1,19 +1,10 @@
 # e-commerce
 
-## Project setup
-```
-npm install
-```
+Vuejs proyect
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## View page
 
-### Compiles and minifies for production
-```
-npm run build
-```
+https://ventas-5eb5a.web.app
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
