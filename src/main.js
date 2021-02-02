@@ -10,7 +10,7 @@ import 'firebase/auth'
 import 'firebase/storage'
 
 var firebaseConfig = {
-  apiKey: "AIzaSyCS3ET5boFO9KQYfzXVM3wetboBTwoIPpY",
+  apiKey: "",
   authDomain: "ventas-5eb5a.firebaseapp.com",
   databaseURL: "https://ventas-5eb5a.firebaseio.com",
   projectId: "ventas-5eb5a",
